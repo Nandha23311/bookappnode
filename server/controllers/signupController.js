@@ -16,7 +16,7 @@ exports.save = (req,res)=>{
             res.status(500).json({error: "error while saving"});
         }
         else{
-            res.status(200).json(success);
+            res.status(200).json({data: success});
         }
     })
 }
@@ -32,7 +32,7 @@ exports.getCren = (req,res) => {
             res.status(400).json({error: "user not found"});
         }
         else{
-            res.status(200).json(success);
+            res.status(200).json({data: success});
         }
     })
 }
