@@ -27,3 +27,50 @@ exports.getBooks = (req,res) => {
         res.status(200).json({data: success});
     })
 }
+
+exports.getSubscribe = (req,res) =>{
+    let reqBody = req.body;
+    let userId = mongoose.Types.ObjectId(reqBody.userId);
+    Book.findOneAndUpdate({book_id : reqBody.book_id  , userId : userId} ,{ isBooked : true } , (error,success) => {
+        console.log('success',success)
+        if(error){
+            console.log('error');
+            res.status(500).json({error : 'error while updating'});
+       }
+       res.status(200).json({data : success});
+    })
+}
+
+exports.getUnsubscribe = (req,res) =>{
+    let reqBody = req.body;
+    let userId = mongoose.Types.ObjectId(reqBody.userId);
+    Book.findOneAndUpdate({book_id: reqBody._id }, {userId : null , isBooked : false } , (error,success) => {
+        console.log('success',success)
+        if(error){
+            console.log('error');
+            res.status(500).json({error : 'error while updating'});
+       }
+       res.status(200).json({data : success});
+    })
+}
+
+exports.addBooks = (req,res) => {
+    let reqBody = req.body;
+
+    let aBooks = new Book({
+        bookName : reqBody.bookName,
+        authorName : reqBody.authorName,
+        description : reqBody.description,
+        url : reqBody.url,
+    })
+
+    aBooks.save( (error,success) => {
+        if(error){
+            console.log('error');
+            res.status(500).json({error: "error while saving"});
+        }
+        else{
+            res.status(200).json({data: success});
+        }
+    })
+}
