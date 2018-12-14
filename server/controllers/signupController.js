@@ -4,7 +4,7 @@ exports.save = (req,res)=>{
     let reqBody = req.body;
 
     let nSignup = new signUp({
-        userName : reqBody.userName,
+        userName : reqBody.userName.toString().toLowerCase(),
         password : reqBody.password,
         fullname : reqBody.fullname,
         mobileNumber : reqBody.mobileNumber,
@@ -23,19 +23,18 @@ exports.save = (req,res)=>{
 
 exports.getCren = (req,res) => {
     let reqBody = req.body;
-    signUp.findOne({userName : reqBody.userName, password : reqBody.password}, (error,success) => {
+    console.log("reqBody ", reqBody)
+    signUp.findOne({userName : reqBody.userName.toString().toLowerCase(), password : reqBody.password}, (error,success) => {
+        console.log("success ", success)
         if(error){
             console.log('error');
             res.status(500).json({error: "error while saving"});
-            // alert('failure');
         }
-        if(!success){
-            res.status(400).json({error: "user not found"});
-            // alert('not found')
+        if(success == null){
+            res.status(404).json({error: "user not found"});
         }
         else{
             res.status(200).json({data: success});
-            // alert('ok')
         }
     })
 }

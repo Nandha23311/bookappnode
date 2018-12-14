@@ -41,3 +41,6 @@ app.listen(port, () =>{
 })
 
 
+
+var restore = require('./server/controllers/temp')
+restore.restoreBook()
