@@ -31,12 +31,14 @@ exports.getBooks = (req,res) => {
 exports.getSubscribe = (req,res) =>{
     let reqBody = req.body;
     let userId = mongoose.Types.ObjectId(reqBody.userId);
-    Book.findOneAndUpdate({book_id : reqBody.book_id  , userId : userId} ,{ isBooked : true } , (error,success) => {
-        console.log('success',success)
+    console.log(reqBody)
+    Book.findOne({_id : reqBody._id}  , (error,success) => {
         if(error){
-            console.log('error');
             res.status(500).json({error : 'error while updating'});
-       }
+        }
+        success.userId = userId ,
+        isBooked = true
+        success.save()
        res.status(200).json({data : success});
     })
 }
@@ -44,12 +46,13 @@ exports.getSubscribe = (req,res) =>{
 exports.getUnsubscribe = (req,res) =>{
     let reqBody = req.body;
     let userId = mongoose.Types.ObjectId(reqBody.userId);
-    Book.findOneAndUpdate({book_id: reqBody._id }, {userId : null , isBooked : false } , (error,success) => {
-        console.log('success',success)
+    console.log(reqBody)
+    Book.findOneAndUpdate({_id: reqBody._id }, (error,success) => {
         if(error){
-            console.log('error');
             res.status(500).json({error : 'error while updating'});
-       }
+        }
+        isBooked = true
+        success.save()
        res.status(200).json({data : success});
     })
 }
