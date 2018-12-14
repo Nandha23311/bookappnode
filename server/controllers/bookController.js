@@ -31,7 +31,8 @@ exports.getBooks = (req,res) => {
 exports.getSubscribe = (req,res) =>{
     let reqBody = req.body;
     let userId = mongoose.Types.ObjectId(reqBody.userId);
-    Book.findOneAndUpdate({book_id : reqBody.book_id  , userId : userId} ,{ isBooked : true } , (error,success) => {
+    console.log(reqBody)
+    Book.findOneAndUpdate({_id : reqBody._id}  , {userId : userId , isBooked : true } , (error,success) => {
         console.log('success',success)
         if(error){
             console.log('error');
@@ -44,7 +45,8 @@ exports.getSubscribe = (req,res) =>{
 exports.getUnsubscribe = (req,res) =>{
     let reqBody = req.body;
     let userId = mongoose.Types.ObjectId(reqBody.userId);
-    Book.findOneAndUpdate({book_id: reqBody._id }, {userId :  userId , isBooked : false } , (error,success) => {
+    console.log(reqBody)
+    Book.findOneAndUpdate({_id: reqBody._id }, {userId :  null , isBooked : false } , (error,success) => {
         console.log('success',success)
         if(error){
             console.log('error');
