@@ -27,15 +27,15 @@ exports.getCren = (req,res) => {
         if(error){
             console.log('error');
             res.status(500).json({error: "error while saving"});
-            alert('failure');
+            // alert('failure');
         }
         if(!success){
             res.status(400).json({error: "user not found"});
-            alert('not found')
+            // alert('not found')
         }
         else{
             res.status(200).json({data: success});
-            alert('ok')
+            // alert('ok')
         }
     })
 }
