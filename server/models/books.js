@@ -8,7 +8,7 @@ let bookSchema = new Schema({
     description : {type : String},
     url : {type : String},
     userId : {type : ObjectId, ref: 'signup'},
-    isBooked : {type : Boolean, default: false}
+    isBooked : {type : Boolean}
 })
 
 module.exports = mongoose.model('books',bookSchema);

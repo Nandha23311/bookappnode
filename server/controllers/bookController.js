@@ -18,7 +18,7 @@ exports.getSubscribedBook = (req,res) => {
 }
 exports.getBooks = (req,res) => {
     let reqBody = req.body;
-    Book.find({isBooked:false}, (error,success) => {
+    Book.find({isBooked: false}, (error,success) => {
         console.log("success ", success)
         if(error){
             console.log('error');
